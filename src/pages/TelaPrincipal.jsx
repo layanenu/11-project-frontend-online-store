@@ -24,8 +24,7 @@ class TelaPrincipal extends React.Component {
 
         )}
       </div>
-
     );
-  };
+  }
 }
 export default TelaPrincipal;
