@@ -24,6 +24,7 @@ class TelaPrincipal extends React.Component {
 
         )}
       </div>
+      
     );
   }
 }
