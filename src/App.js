@@ -1,11 +1,19 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import "./App.css";
-import TelaPrincipal from "./pages/TelaPrincipal";
-import Carrinho from "./pages/Carrinho";
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import TelaPrincipal from './pages/TelaPrincipal';
 
-class App extends React.Component {
+import './App.css';
+import * as api from './services/api';
+
+class App extends Component {
+  componentDidMount() {
+    api.getCategories().then((categories) => { console.log(categories); });
+    api.getProductsFromCategoryAndQuery()
+      .then((categoria) => { console.log(categoria); });
+  }
+
+
   render() {
     return (
       <BrowserRouter>
@@ -14,6 +22,7 @@ class App extends React.Component {
           <Route exact path="/carrinho" component={Carrinho} />
         </Switch>
       </BrowserRouter>
+
     );
   }
 }
