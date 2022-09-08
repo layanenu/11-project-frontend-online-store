@@ -1,18 +1,20 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import * as api from "./services/api";
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import * as api from './services/api';
 
 class App extends Component {
   componentDidMount() {
-    api.getCategories().then((categories) => {console.log(categories);});
-    api.getProductsFromCategoryAndQuery().then((categoria) => {console.log(categoria);});
+    api.getCategories().then((categories) => { console.log(categories); });
+    api.getProductsFromCategoryAndQuery()
+      .then((categoria) => { console.log(categoria); });
   }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={ logo } className="App-logo" alt="logo" />
           <p>Edit src/App.js and save to reload.</p>
           <a
             className="App-link"
