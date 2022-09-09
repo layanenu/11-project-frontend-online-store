@@ -4,7 +4,6 @@ import TelaPrincipal from './pages/TelaPrincipal';
 import Carrinho from './pages/Carrinho';
 
 import './App.css';
-import * as api from './services/api';
 
 class App extends Component {
   state = {
@@ -40,7 +39,6 @@ class App extends Component {
           <Route exact path="/carrinho" component={ Carrinho } />
         </Switch>
       </BrowserRouter>
-
     );
   }
 }

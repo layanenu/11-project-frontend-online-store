@@ -29,6 +29,18 @@ class TelaPrincipal extends React.Component {
     });
   };
 
+  componentDidMount() {
+    api.getCategories().then((categories) => {
+      console.log(categories);
+    });
+    const produtosPorCategoriaBusca = api
+      .getProductsFromCategoryAndQuery()
+      .then((categoria) => {
+        console.log(categoria);
+      });
+    this.setState({ produtosPorCategoria: produtosPorCategoriaBusca });
+  }
+
   render() {
     const { listProduct, redirect } = this.state;
     const { produtoCategoria } = this.props;
