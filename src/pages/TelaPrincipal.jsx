@@ -29,13 +29,10 @@ class TelaPrincipal extends React.Component {
     });
   };
 
-
   handleCategory = async (event) => {
     const request = await api.getProductsFromCategoryAndQuery(event.target.name, null);
     this.setState({ listProduct: request.results });
   };
-
-
 
   render() {
     const { listProduct, redirect } = this.state;
