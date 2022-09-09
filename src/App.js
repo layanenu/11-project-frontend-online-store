@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TelaPrincipal from './pages/TelaPrincipal';
 import Carrinho from './pages/Carrinho';
+import * as api from './services/api';
 
 import './App.css';
-import * as api from './services/api';
 
 class App extends Component {
   state = {
@@ -39,7 +39,6 @@ class App extends Component {
           <Route exact path="/carrinho" component={ Carrinho } />
         </Switch>
       </BrowserRouter>
-
     );
   }
 }
