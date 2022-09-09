@@ -19,8 +19,7 @@ class App extends Component {
         produtoCategoria: result,
       });
     };
-    api.getProductsFromCategoryAndQuery()
-      .then((categoria) => { console.log(categoria); });
+
     request();
   }
 

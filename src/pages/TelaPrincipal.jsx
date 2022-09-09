@@ -22,11 +22,16 @@ class TelaPrincipal extends React.Component {
   handleClickQuery = async () => {
     const { value } = this.state;
     console.log(value);
-    const request = await api.getProductById('', value);
+    const request = await api.getProductsFromCategoryAndQuery('', value);
     console.log(request);
     this.setState({
       listProduct: request.results,
     });
+  };
+
+  handleCategory = async (event) => {
+    const request = await api.getProductsFromCategoryAndQuery(event.target.name, null);
+    this.setState({ listProduct: request.results });
   };
 
   render() {
@@ -68,9 +73,16 @@ class TelaPrincipal extends React.Component {
         )}
         <div>
           {produtoCategoria.map((element) => (
-            <button type="button" data-testid="category" key={ element.id }>
-              {element.name}
-            </button>
+            <div key={ element.id }>
+              <button
+                type="button"
+                data-testid="category"
+                onClick={ this.handleCategory }
+                name={ element.id }
+              >
+                {element.name}
+              </button>
+            </div>
           ))}
         </div>
         <ul>
