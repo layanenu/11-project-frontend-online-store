@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class TelaPrincipal extends React.Component {
   state = {
@@ -13,6 +14,7 @@ class TelaPrincipal extends React.Component {
 
   render() {
     const { listProduct, redirect } = this.state;
+    const { produtoCategoria } = this.props;
 
     return (
       <div>
@@ -35,8 +37,23 @@ class TelaPrincipal extends React.Component {
         {redirect && (
           <Redirect data-testid="shopping-cart-button" to="/carrinho" />
         )}
+        <div>
+          {produtoCategoria.map((element) => (
+            <button
+              type="button"
+              data-testid="category"
+              key={ element.id }
+            >
+              {element.name}
+            </button>
+          ))}
+        </div>
       </div>
     );
   }
 }
+TelaPrincipal.propTypes = {
+  produtoCategoria: PropTypes.shape({}),
+}.isRequired;
+
 export default TelaPrincipal;
