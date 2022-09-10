@@ -1,7 +1,6 @@
 import React from 'react';
 
 class Carrinho extends React.Component {
-
   state = {
     produto: [],
   };
@@ -37,5 +36,6 @@ class Carrinho extends React.Component {
         )}
       </div>
     );
+  }
 }
 export default Carrinho;
