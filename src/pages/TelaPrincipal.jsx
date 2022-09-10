@@ -8,6 +8,7 @@ class TelaPrincipal extends React.Component {
     listProduct: [],
     redirect: false,
     value: '',
+   
   };
 
   handleClick = () => {
@@ -21,9 +22,7 @@ class TelaPrincipal extends React.Component {
 
   handleClickQuery = async () => {
     const { value } = this.state;
-    console.log(value);
     const request = await api.getProductsFromCategoryAndQuery('', value);
-    console.log(request);
     this.setState({
       listProduct: request.results,
     });
@@ -33,7 +32,6 @@ class TelaPrincipal extends React.Component {
     const request = await api.getProductsFromCategoryAndQuery(event.target.name, null);
     this.setState({ listProduct: request.results });
   };
-
   render() {
     const { listProduct, redirect } = this.state;
     const { produtoCategoria } = this.props;
@@ -98,6 +96,7 @@ class TelaPrincipal extends React.Component {
             ))
           )}
         </ul>
+
       </div>
     );
   }
