@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
@@ -8,8 +8,14 @@ class TelaPrincipal extends React.Component {
     listProduct: [],
     redirect: false,
     value: '',
+    localestado: [],
   };
 
+  componentDidMount() {
+    const pegarlocal = JSON.parse(localStorage.getItem('produto')) || [];
+    this.setState({ localestado: pegarlocal });
+  }
+  
   handleClick = () => {
     this.setState({ redirect: true });
   };
@@ -21,9 +27,7 @@ class TelaPrincipal extends React.Component {
 
   handleClickQuery = async () => {
     const { value } = this.state;
-    console.log(value);
     const request = await api.getProductsFromCategoryAndQuery('', value);
-    console.log(request);
     this.setState({
       listProduct: request.results,
     });
@@ -32,6 +36,23 @@ class TelaPrincipal extends React.Component {
   handleCategory = async (event) => {
     const request = await api.getProductsFromCategoryAndQuery(event.target.name, null);
     this.setState({ listProduct: request.results });
+  };
+
+  adcCarrinho = async (id) => {
+    const { listProduct, localestado } = this.state;
+    const produto = listProduct.find((element) => element.id === id);// adc ao array nova o produto do list q for igual ao produto clicado
+    const igual = localestado.some((e) => e.id === produto.id);// procura se existe produto igual do que veio lo local com o produto clicado
+    if (igual) {
+      produto.amount += 1; // adc +1 se for igual
+      const existe = localestado.findIndex((e) => e.id === produto.id);
+      localestado.splice(existe, 1);// remove um elemento do índice q é o(existe)
+      localestado.push(produto);// coloco no state o produto ja atualizado
+      localStorage.setItem('produto', JSON.stringify(localestado));// salvo novamente em local
+    } else {
+      produto.amount = Number(1);// adc uma chave nova com o valor 1
+      localestado.push(produto);// salvo o produto no state ja atualizado
+      localStorage.setItem('produto', JSON.stringify(localestado));// salvo em local
+    }
   };
 
   render() {
@@ -90,11 +111,26 @@ class TelaPrincipal extends React.Component {
             <p> Nenhum produto foi encontrado</p>
           ) : (
             listProduct.map((element) => (
-              <li data-testid="product" key={ element.id }>
-                <p>{element.title}</p>
-                <img src={ element.thumbnail } alt={ element.title } />
-                <p>{`R$: ${element.price}`}</p>
-              </li>
+
+              <div key={ element.id }>
+                <Link
+                  to={ `/card/${element.id}` }
+                  data-testid="product-detail-link"
+                >
+                  <li data-testid="product">
+                    <p>{element.title}</p>
+                    <img src={ element.thumbnail } alt={ element.title } />
+                    <p>{`R$: ${element.price}`}</p>
+                  </li>
+                </Link>
+                <button
+                  data-testid="product-add-to-cart"
+                  type="button"
+                  onClick={ () => this.adcCarrinho(element.id) }
+                >
+                  Adicionar
+                </button>
+              </div>
             ))
           )}
         </ul>

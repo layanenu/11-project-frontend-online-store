@@ -3,8 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TelaPrincipal from './pages/TelaPrincipal';
 import Carrinho from './pages/Carrinho';
 import * as api from './services/api';
-
-import './App.css';
+import Card from './pages/Card';
 
 class App extends Component {
   state = {
@@ -37,6 +36,11 @@ class App extends Component {
             />) }
           />
           <Route exact path="/carrinho" component={ Carrinho } />
+          <Route
+            exact
+            path="/card/:id"
+            component={ Card }
+          />
         </Switch>
       </BrowserRouter>
     );
