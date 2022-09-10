@@ -15,7 +15,7 @@ class TelaPrincipal extends React.Component {
     const pegarlocal = JSON.parse(localStorage.getItem('produto')) || [];
     this.setState({ localestado: pegarlocal });
   }
-
+  
   handleClick = () => {
     this.setState({ redirect: true });
   };
@@ -111,6 +111,7 @@ class TelaPrincipal extends React.Component {
             <p> Nenhum produto foi encontrado</p>
           ) : (
             listProduct.map((element) => (
+
               <div key={ element.id }>
                 <Link
                   to={ `/card/${element.id}` }

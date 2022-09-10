@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TelaPrincipal from './pages/TelaPrincipal';
 import Carrinho from './pages/Carrinho';
 import * as api from './services/api';
-import './App.css';
 import Card from './pages/Card';
 
 class App extends Component {
@@ -14,6 +13,7 @@ class App extends Component {
   componentDidMount() {
     const request = async () => {
       const result = await api.getCategories();
+
       this.setState({
         produtoCategoria: result,
       });
