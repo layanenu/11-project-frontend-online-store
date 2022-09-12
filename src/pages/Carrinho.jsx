@@ -23,15 +23,15 @@ class Carrinho extends React.Component {
           </p>
         ) : (
           produto.map((element) => (
-            <>
-              <div data-testid="product" key={ element.id }>
+            <div key={ element.id }>
+              <div data-testid="product">
                 <p data-testid="shopping-cart-product-name">{element.title}</p>
                 <p>{`R$: ${element.price}`}</p>
               </div>
               <p data-testid="shopping-cart-product-quantity">
                 {element.amount}
               </p>
-            </>
+            </div>
           ))
         )}
       </div>
