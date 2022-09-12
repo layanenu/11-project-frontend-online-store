@@ -24,7 +24,7 @@ class Carrinho extends React.Component {
       produto.splice(index, 1);
       produto.push(item);
       localStorage.setItem('produto', JSON.stringify(produto));
-    }else {
+    } else {
       item.amount = Number(1);
       produto.push(produto);
       localStorage.setItem('produto', JSON.stringify(localestado));
@@ -68,7 +68,7 @@ class Carrinho extends React.Component {
         ) : (
           produto.map((element) => (
             <div key={ element.id }>
-              <div data-testid="product" >
+              <div data-testid="product">
                 <p data-testid="shopping-cart-product-name">{element.title}</p>
                 <p>{`R$: ${element.price}`}</p>
               </div>
